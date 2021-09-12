@@ -3,6 +3,8 @@ package com.gogaedd.salinasgroupmoviedb_gge.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 @Entity
 data class Movie(
 
@@ -47,4 +49,4 @@ data class Movie(
     var voteCount: String = ""
 
 
-)
+): Serializable

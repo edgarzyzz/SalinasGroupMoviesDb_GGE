@@ -20,6 +20,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@{viewmodel.lvdMessageError}"
             visibilityMessageError="@{viewmodel.lvdStateload}"
+            android:textSize="32dp"
+            android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +34,7 @@
             visibilityLoader="@{viewmodel.lvdStateload}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

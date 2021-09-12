@@ -12,6 +12,7 @@ import com.gogaedd.salinasgroupmoviedb_gge.model.CategoryMovie
 import com.gogaedd.salinasgroupmoviedb_gge.model.Movie
 import com.gogaedd.salinasgroupmoviedb_gge.utils.UtilsNet
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
 class SplashRepository(val application: Application) : NetListener {
@@ -41,6 +42,7 @@ class SplashRepository(val application: Application) : NetListener {
             setStateLoad(ConstantsApp.STATE_LOAD.START_LOADING)
             if (UtilsNet.isOnline(application)) {
                 deleteInfoDb()
+                delay(1500)
                 getNowPlaying()
             } else {
                 if (existContentDb()) {
@@ -96,6 +98,7 @@ class SplashRepository(val application: Application) : NetListener {
 
                     runBlocking(Dispatchers.IO) {
                         saveMoviesInDb(listMoviesNowplaying, true)
+                        delay(5000)
                         getMostpopular()
                     }
 
@@ -106,6 +109,9 @@ class SplashRepository(val application: Application) : NetListener {
                     val listMoviesPopular = any as MutableList<Movie>
                     runBlocking(Dispatchers.IO) {
                         saveMoviesInDb(listMoviesPopular, false)
+                        //todo: Pasar a sig pantall
+                        delay(3000)
+                        lvdStateload.postValue(ConstantsApp.STATE_LOAD.LOAD_OK)
 
                     }
                 }
@@ -131,12 +137,6 @@ class SplashRepository(val application: Application) : NetListener {
 
     }
 
-    fun loadMovies() {
-        runBlocking(Dispatchers.IO) {
-            val selectAll = movieDao.selectAll()
-        }
-
-    }
 
 
     private suspend fun saveMoviesInDb(
@@ -152,11 +152,9 @@ class SplashRepository(val application: Application) : NetListener {
 
                 //UPDATE
                 if (isNowPlaying) {
-                    categoryStore.movie_now_playing = 1
-                    categoryMoviesDao.updateStatusNowplaying(categoryStore)
+                    categoryMoviesDao.updateStatusNowplaying(categoryStore.id)
                 } else {
-                    categoryStore.movie_popular = 1
-                    categoryMoviesDao.updateStatusPopular(categoryStore)
+                    categoryMoviesDao.updateStatusPopular(categoryStore.id)
                 }
 
 
@@ -175,8 +173,7 @@ class SplashRepository(val application: Application) : NetListener {
                 }
 
                 categoryMoviesDao.insertStatusMovie(categoryMovie)
-                //todo: Pasar a sig pantall
-                lvdStateload.postValue(ConstantsApp.STATE_LOAD.LOAD_OK)
+
             }
         }
     }

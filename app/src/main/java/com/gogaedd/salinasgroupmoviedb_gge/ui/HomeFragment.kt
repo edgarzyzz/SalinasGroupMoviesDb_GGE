@@ -64,7 +64,7 @@ class HomeFragment : Fragment(), MovieListener {
     }
 
     override fun onClickMovie(moview: Movie) {
-        val action = HomeFragmentDirections.actionGoToDetailMovieFragment()
+        val action = HomeFragmentDirections.actionGoToDetailMovieFragment(moview)
         findNavController().navigate(action)
     }
 

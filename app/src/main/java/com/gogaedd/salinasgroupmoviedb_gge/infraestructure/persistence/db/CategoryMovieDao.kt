@@ -6,18 +6,18 @@ import com.gogaedd.salinasgroupmoviedb_gge.model.CategoryMovie
 @Dao
 interface CategoryMovieDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertStatusMovie(catgoryMoview:CategoryMovie)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAllStatusMovie (vararg catgoryMoview:CategoryMovie)
 
 
-    @Update
-    fun updateStatusPopular(catgoryMoview: CategoryMovie)
+    @Query("UPDATE   CategoryMovie Set movie_popular = 1 where id = :id")
+    fun updateStatusPopular(id: String)
 
-    @Update
-    fun updateStatusNowplaying(catgoryMoview: CategoryMovie)
+    @Query("UPDATE   CategoryMovie Set movie_now_playing = 1 where id = :id")
+    fun updateStatusNowplaying(id: String)
 
     @Delete
     fun deleteSattusMoview(catgoryMovie: CategoryMovie)

@@ -7,10 +7,10 @@ import com.gogaedd.salinasgroupmoviedb_gge.model.Movie
 @Dao
 interface MovieDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAllMovies(movies: MutableList<Movie>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertMovie(movie: Movie)
 
 
