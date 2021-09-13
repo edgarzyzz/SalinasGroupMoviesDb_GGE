@@ -2,6 +2,7 @@ package com.gogaedd.salinasgroupmoviedb_gge.infraestructure
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.RatingBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -79,5 +80,13 @@ object BindingAdapters {
 
 
         Glide.with(imgview.context).load(url).apply(options).into(imgview)
+    }
+    @JvmStatic
+    @BindingAdapter("drawRatingBy10")
+    fun drawRatingBy10(rb:RatingBar, rate:Float){
+
+        val fl = rate / 2
+        rb.rating= fl
+
     }
 }

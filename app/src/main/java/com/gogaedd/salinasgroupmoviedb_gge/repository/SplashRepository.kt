@@ -42,7 +42,7 @@ class SplashRepository(val application: Application) : NetListener {
             setStateLoad(ConstantsApp.STATE_LOAD.START_LOADING)
             if (UtilsNet.isOnline(application)) {
                 deleteInfoDb()
-                delay(1500)
+                delay(500)
                 getNowPlaying()
             } else {
                 if (existContentDb()) {
@@ -98,7 +98,7 @@ class SplashRepository(val application: Application) : NetListener {
 
                     runBlocking(Dispatchers.IO) {
                         saveMoviesInDb(listMoviesNowplaying, true)
-                        delay(5000)
+                        delay(1000)
                         getMostpopular()
                     }
 
@@ -110,7 +110,7 @@ class SplashRepository(val application: Application) : NetListener {
                     runBlocking(Dispatchers.IO) {
                         saveMoviesInDb(listMoviesPopular, false)
                         //todo: Pasar a sig pantall
-                        delay(3000)
+                        delay(7000)
                         lvdStateload.postValue(ConstantsApp.STATE_LOAD.LOAD_OK)
 
                     }
